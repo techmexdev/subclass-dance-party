@@ -21,13 +21,21 @@ $(document).ready(function() {
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
-
-    var dancer = dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+    var top = $("body").height() * Math.random();
+    var bottom = $("body").width() * Math.random();
+    var dancer = new dancerMakerFunction(
+      top, bottom,
       Math.random() * 1000
     );
+    window.dancers.push(dancer);
     $('body').append(dancer.$node);
+  });
+  $('.lineUp').on('click', function() {
+    for (var i = 0; i < window.dancers.length; i++) {
+
+      console.log(window.dancers[i]);
+    }
+    $('.dancer').css({left: 0});
   });
 });
 
