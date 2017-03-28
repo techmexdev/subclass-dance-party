@@ -1,6 +1,6 @@
 $(document).ready(function() {
   window.dancers = [];
-
+  // $('html,body').css('cursor','pacman');
   $('.addDancerButton').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -21,21 +21,31 @@ $(document).ready(function() {
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
-    var top = $("body").height() * Math.random();
-    var bottom = $("body").width() * Math.random();
+
+    var top = Math.max(0, $("body").height() * Math.random());
+    var left = Math.max(0, $("body").width() * Math.random());
     var dancer = new dancerMakerFunction(
-      top, bottom,
+      top, left,
       Math.random() * 1000
     );
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
-  });
-  $('.lineUp').on('click', function() {
-    for (var i = 0; i < window.dancers.length; i++) {
 
-      console.log(window.dancers[i]);
-    }
+    //attach hover quality to dancers
+    $('.dancer').hover(function() {
+      $(this).css({top: '+=3'});
+    }, function() {
+      $(this).css({left: '+=1'});
+    });
+
+    //add run feature to each dancer
+
+  });
+
+  $('.lineUp').on('click', function() {
     $('.dancer').css({left: 0});
   });
+
+  
 });
 
