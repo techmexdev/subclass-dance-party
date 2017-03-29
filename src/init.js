@@ -16,7 +16,10 @@ $(document).ready(function() {
      * to the stage.
      */
     var dancerMakerFunctionName = $(this).data('dancer-maker-function-name');
-
+    time = Math.random() * 1000;
+    if(dancerMakerFunctionName === 'PacMan'){
+      time = 200;
+    }
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
@@ -26,7 +29,7 @@ $(document).ready(function() {
     var left = Math.max(0, $("body").width() * Math.random());
     var dancer = new dancerMakerFunction(
       top, left,
-      Math.random() * 1000
+      time
     );
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
@@ -38,8 +41,20 @@ $(document).ready(function() {
       $(this).css({left: '+=1'});
     });
 
+    // if (dancerMakerFunctionName === 'PacMan') {
+    //   for (var i = 0; i < window.dancers.length - 1; i++) {
+    //     var topos = window.dancers[i].$node.css('top');
+    //     var t = topos.split('px');
+    //     var leftpos = window.dancers[i].$node.css('left');
+    //     var l = leftpos.split('px');
+    //     if (Math.sqrt((Math.pow((+t[0] - top), 2)) + (Math.pow((+l[0] - left), 2))) < 100) {
+    //       console.log(Math.sqrt((Math.pow((+t[0] - top), 2)) + (Math.pow((+l[0] - left), 2))));
+    //       $('.pacman').css({left: "+=50"});
+    //     }
+    //   }
+    // }
     //add run feature to each dancer
-
+//  create array of ghost?
   });
 
   $('.lineUp').on('click', function() {
